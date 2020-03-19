@@ -5,6 +5,8 @@ dockerbox_sshd_permit_root_login: prohibit-password
 dockerbox_sshd_password_authentication: 'yes'
 
 dockerbox_docker_ce_user_name: ubuntu
+docker_ce_user_passworless_sudoer: yes
+docker_ce_user_add_authorized_key: yes
 dockerbox_docker_ce_user_authorized_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 
 dockerbox_platform_update_cache: yes
