@@ -2,12 +2,12 @@
 
 # Ansible Role: Dockerbox
 
-Bootstraping role for a new virtual machine box.
+Bootstrapping role for a new virtual machine box.
 What it does ?
 * install Docker CE
 * install docker-compose
-* configure passwordless deployer user
-* apply secure SSH config(disable root && with password login, copy ssh key to server)
+* configure passwordless sudoer user
+* apply secure SSH config(disable root and regular user login with password, copy ssh key to server)
 * enable UFW(Uncomplicated FireWall) and setup basic policies and allow ssh, http, and https
 
 ## Requirements
