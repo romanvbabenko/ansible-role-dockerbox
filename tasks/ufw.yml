@@ -1,0 +1,30 @@
+---
+- name: ufw | ensure required package presence
+  apt:
+    name: ufw
+- name: ufw | ensure INCOMING policy denied
+  ufw:
+    policy: deny
+    direction: incoming
+- name: ufw | ensure that OUTGOING policy allowed
+  ufw:
+    policy: allow
+    direction: outgoing
+- name: ufw | ensure that SSH limited
+  ufw:
+    rule: limit
+    port: ssh
+  when: dockerbox_ufw_ssh_limited
+- name: ufw | ensure that HTTP allowed
+  ufw:
+    rule: allow
+    port: http
+  when: dockerbox_ufw_http_allowed
+- name: ufw | ensure that HTTPS allowed
+  ufw:
+    rule: allow
+    port: https
+  when: dockerbox_ufw_https_allowed
+- name: ufw | ensure that UFW enabled
+  ufw:
+    state: enabled

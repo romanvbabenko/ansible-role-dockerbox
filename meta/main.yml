@@ -1,0 +1,17 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: dockerbox
+  author: romanvbabenko
+  description: Bootstraping role for a new virtual machine box(docker,ssh,firewall)
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.4
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+  galaxy_tags:
+    - docker
+    - ssh
+    - ufw

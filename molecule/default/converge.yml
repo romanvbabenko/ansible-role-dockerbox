@@ -1,0 +1,59 @@
+---
+- name: Converge
+  hosts: all
+  become: yes
+
+  roles:
+    - role: ansible-role-dockerbox
+      vars:
+        dockerbox_docker_ce_user_name: ubuntu
+        dockerbox_platform_required_packages:
+          - vim
+        dockerbox_ufw_included: no
+        dockerbox_ufw_ssh_limited: no
+        dockerbox_ufw_http_allowed: no
+        dockerbox_ufw_https_allowed: no
+
+  post_tasks:
+      # docker_compose
+    - name: docker-compose | ensure docker-compose presence
+      command: 'which docker-compose'
+      changed_when: no
+
+      # docker_ce
+    - name: docker-ce | ensure docker presence
+      command: 'which docker'
+      changed_when: no
+    - name: docker-ce-user | ensure docker user privilages
+      command: 'sudo -u ubuntu docker ps'
+      args:
+        warn: no
+      changed_when: no
+    - name: docker_ce_user | ensure docker-ce-user is passwordless sudoer
+      become: yes
+      become_user: ubuntu
+      command: 'sudo cat /etc/shadow'
+      args:
+        warn: no
+      changed_when: no
+    - name: docker_ce_user | ensure authorized_key presence
+      become: yes
+      become_user: ubuntu
+      shell: "set -o pipefail && cat $HOME/.ssh/authorized_keys | wc -l | grep '1'"
+      args:
+        executable: /bin/bash
+        warn: no
+      changed_when: no
+
+      # ufw
+    - name: ufw | ensure ufw presence
+      command: 'which ufw'
+      changed_when: no
+      when: dockerbox_ufw_included
+
+      # ssh
+    - name: sshd | ensure ssh ssh enabled
+      shell: "service sshd status"
+      args:
+        warn: no
+      changed_when: no

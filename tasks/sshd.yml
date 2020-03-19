@@ -1,0 +1,20 @@
+---
+- name: sshd | ensure sshd presence
+  apt:
+    name: openssh-server
+    state: present
+- name: ssdh | ensure sshd service running
+  service:
+    name: sshd
+    enabled: yes
+    state: started
+- name: sshd | apply secure config
+  template:
+    src: sshd.sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0600'
+    validate: /usr/sbin/sshd -t -f %s
+    backup: yes
+  notify: restart sshd

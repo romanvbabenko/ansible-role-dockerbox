@@ -1,0 +1,12 @@
+---
+- name: platform | ensure required packages installed
+  apt:
+    update_cache: '{{ dockerbox_platform_update_cache }}'
+    cache_valid_time: '{{ dockerbox_platform_cache_valid_time }}'
+    state: present
+    name: "{{ dockerbox_platform_required_packages }}"
+- name: platform | fix cache update issue
+  apt:
+    name: apt-transport-https
+    update_cache: yes
+    state: present

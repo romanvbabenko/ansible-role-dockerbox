@@ -1,0 +1,21 @@
+---
+- name: user | add docker user
+  user:
+    name: '{{ dockerbox_docker_ce_user_name }}'
+    shell: /bin/bash
+    groups: docker
+    append: yes
+    create_home: yes
+    state: present
+- name: docker_ce_user | passwordless sudoer
+  template:
+    src: user.20-dockerbox-users.j2
+    dest: /etc/sudoers.d/20-dockerbox-users
+    owner: root
+    group: root
+    mode: o=r,g=r
+- name: docker_ce_user | add authorized key
+  authorized_key:
+    user: '{{ dockerbox_docker_ce_user_name }}'
+    state: present
+    key: "{{ dockerbox_docker_ce_user_authorized_key }}"

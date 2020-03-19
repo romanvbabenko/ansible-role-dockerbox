@@ -1,0 +1,22 @@
+---
+- name: docker | add key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+- name: docker | lsb_release -cs
+  shell: lsb_release -cs
+  register: lsb_release_cs
+  changed_when: no
+- name: docker | add_repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release_cs.stdout }} stable"
+    update_cache: yes
+    state: present
+- name: docker | ensure docker-ce package presence
+  apt:
+    name: docker-ce
+- name: docker | service
+  service:
+    name: docker
+    enabled: yes
+    state: started

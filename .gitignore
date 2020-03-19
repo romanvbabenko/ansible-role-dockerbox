@@ -1,0 +1,5 @@
+.*
+!.gitignore
+!.yamllint
+!.ansible-lint
+!.travis.yml

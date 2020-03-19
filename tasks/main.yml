@@ -1,0 +1,8 @@
+---
+- include_tasks: platform.yml
+- include_tasks: sshd.yml
+- include_tasks: docker_ce.yml
+- include_tasks: docker_compose.yml
+- include_tasks: docker_ce_user.yml
+- include_tasks: ufw.yml
+  when: dockerbox_ufw_included

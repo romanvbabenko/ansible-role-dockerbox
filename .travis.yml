@@ -1,0 +1,20 @@
+---
+language: python
+services: docker
+
+env:
+  global:
+    - ROLE_NAME: dockerbox
+  matrix:
+    - MOLECULE_DISTRO: ubuntu1604
+
+before_install:
+  - ssh-keygen -t rsa -N '' -f $HOME/.ssh/id_rsa
+
+install:
+  # Install test dependencies.
+  - pip install molecule yamllint ansible-lint docker
+
+script:
+  # Run tests.
+  - molecule test

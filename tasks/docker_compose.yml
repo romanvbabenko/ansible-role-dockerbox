@@ -1,0 +1,16 @@
+---
+- name: docker-compose | uname -s
+  shell: uname -s
+  changed_when: no
+  register: uname_s
+- name: docker-compose | uname -m
+  shell: uname -m
+  changed_when: no
+  register: uname_m
+- name: docker-compose | ensure binary presence
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ dockerbox_docker_compose_version }}/docker-compose-{{ uname_s.stdout }}-{{ uname_m.stdout }}"
+    dest: /usr/local/bin/docker-compose
+    owner: root
+    group: root
+    mode: +x

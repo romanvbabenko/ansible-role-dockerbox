@@ -1,0 +1,22 @@
+---
+dockerbox_sshd_syslog_facility: AUTH
+dockerbox_sshd_log_level: INFO
+dockerbox_sshd_permit_root_login: prohibit-password
+dockerbox_sshd_password_authentication: 'yes'
+
+dockerbox_docker_ce_user_name: ubuntu
+dockerbox_docker_ce_user_authorized_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+
+dockerbox_platform_update_cache: yes
+dockerbox_platform_cache_valid_time: 0
+dockerbox_platform_required_packages:
+  - htop
+  - tree
+  - vim
+
+dockerbox_docker_compose_version: 1.26.0-rc3
+
+dockerbox_ufw_included: yes
+dockerbox_ufw_ssh_limited: yes
+dockerbox_ufw_http_allowed: yes
+dockerbox_ufw_https_allowed: yes
