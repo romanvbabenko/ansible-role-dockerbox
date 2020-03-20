@@ -6,11 +6,12 @@ galaxy_info:
   author: romanvbabenko
   description: Bootstraping role for a new virtual machine box(docker,ssh,firewall)
   license: "license (BSD, MIT)"
-  min_ansible_version: 2.4
+  min_ansible_version: 2.9
   platforms:
     - name: Ubuntu
       versions:
         - xenial
+        - bionic
   galaxy_tags:
     - docker
     - ssh

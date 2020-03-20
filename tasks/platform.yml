@@ -10,3 +10,7 @@
     name: apt-transport-https
     update_cache: yes
     state: present
+- name: platform | ensure gnupg presence
+  apt:
+    name: gnupg
+    state: present
