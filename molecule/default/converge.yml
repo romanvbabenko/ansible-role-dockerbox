@@ -9,10 +9,10 @@
         dockerbox_docker_ce_user_name: ubuntu
         dockerbox_platform_required_packages:
           - vim
-        dockerbox_ufw_included: no
-        dockerbox_ufw_ssh_limited: no
-        dockerbox_ufw_http_allowed: no
-        dockerbox_ufw_https_allowed: no
+        dockerbox_ufw_included: yes
+        dockerbox_ufw_ssh_limited: yes
+        dockerbox_ufw_http_allowed: yes
+        dockerbox_ufw_https_allowed: yes
 
   post_tasks:
       # docker_compose
